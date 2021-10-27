@@ -50,10 +50,34 @@ class TestMove(unittest.TestCase):
         self.assertEqual(3, num)
         self.assertEqual(1, kuriagari)
 
-    def test_calcWithBaseMinus(self):
+    def test_calcWithBaseMinus1(self):
+        """test method for _calcWithBase
+        """
+
+        num, kuriagari = _calcWithBase(0, -9, 10)
+        self.assertEqual(1, num)
+        self.assertEqual(-1, kuriagari)
+
+    def test_calcWithBaseMinus2(self):
+        """test method for _calcWithBase
+        """
+
+        num, kuriagari = _calcWithBase(0, -10, 10)
+        self.assertEqual(0, num)
+        self.assertEqual(-1, kuriagari)
+
+    def test_calcWithBaseMinus3(self):
+        """test method for _calcWithBase
+        """
+
+        num, kuriagari = _calcWithBase(0, -11, 10)
+        self.assertEqual(9, num)
+        self.assertEqual(-2, kuriagari)
+
+    def test_calcWithBase7Minus(self):
         """test method for _calcWithBase
         """
 
         num, kuriagari = _calcWithBase(3, -10, 7)
         self.assertEqual(0, num)
-        self.assertEqual(-2, kuriagari)
+        self.assertEqual(-1, kuriagari)

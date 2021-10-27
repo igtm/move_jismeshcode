@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
+from typing import List, Union
 
 # 5次メッシュ(250m) を(x, y)移動させる
-def move(meshCode, x, y):
-
+def move(meshCode: Union[int, str], x: int, y: int) -> int:
     ls = _listDigit(meshCode)
+    ls = _move(ls, x, y)
 
+    # 文字列に直す
+    ret = ''
+    for l in ls:
+      ret += '{}'.format(l)
+
+    return int(ret)
+
+def _move(ls: List[int], x: int, y: int) -> List[int]:
     for i, l in enumerate(reversed(ls)):
       digit = len(ls) - i
       if digit >= 9: # 4次メッシュ以下(分割地域メッシュ)
@@ -18,20 +27,14 @@ def move(meshCode, x, y):
         ls[digit-1], x = _calcWithBase(ls[digit-1], x)
       else: # [1,2,7] 1次メッシュ,3次メッシュY
         ls[digit-1], y = _calcWithBase(ls[digit-1], y)
+    return ls
 
-    # 文字列に直す
-    ret = ''
-    for l in ls:
-      ret += '{}'.format(l)
-
-    return int(ret)
-
-def _listDigit(meshCode):
-  ls = []
-  meshCode = '{}'.format(meshCode)
-  for ch in meshCode:
-    ls.append(int(ch))
-  return ls
+def _listDigit(meshCode: Union[int, str]) -> List[int]:
+    ls = []
+    meshCode = '{}'.format(meshCode)
+    for ch in meshCode:
+      ls.append(int(ch))
+    return ls
 
 def _moveXBelow9Iter(num, add=1):
   xkuriage = 0
@@ -81,9 +84,9 @@ def _moveYBelow9(num, positive=True):
     else:
       return num + 2, -1 # 繰り下がり
 
-def _calcWithBase(num, add, base=10):
+def _calcWithBase(num, add, base=10): # 3, -7 base=10
   num += add
   if num >= 0:
     return num % base, int(num / base)
   else:
-    return num % base, int(num / base) - 1
+    return num % base, int((num + 1) / base) - 1

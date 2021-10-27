@@ -18,6 +18,11 @@ import move_jismeshcode as mj
 newmeshcode = mj.move(5438234312, 5, 3)
 print(newmeshcode)
 5438235342
+
+# メッシュコード(5438235342) - メッシュコード(5438234312) の座標を返す
+x, y = mj.sub(5438235342, 5438234312)
+print(x, y)
+5, 3
 ```
 
 # Todo
