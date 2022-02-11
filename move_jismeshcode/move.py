@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import List, Union
 
 # 5次メッシュ(250m) を(x, y)移動させる
@@ -17,16 +16,22 @@ def _move(ls: List[int], x: int, y: int) -> List[int]:
     for i, l in enumerate(reversed(ls)):
       digit = len(ls) - i
       if digit >= 9: # 4次メッシュ以下(分割地域メッシュ)
-        ls[digit-1], x = _moveXBelow9Iter(ls[digit-1], x)
-        ls[digit-1], y = _moveYBelow9Iter(ls[digit-1], y)
+        if x != 0:
+          ls[digit-1], x = _moveXBelow9Iter(ls[digit-1], x)
+        if y != 0:
+          ls[digit-1], y = _moveYBelow9Iter(ls[digit-1], y)
       elif digit == 6: # 2次メッシュx
-        ls[digit-1], x = _calcWithBase(ls[digit-1], x, 7)
+        if x != 0:
+          ls[digit-1], x = _calcWithBase(ls[digit-1], x, 7)
       elif digit == 5: # 2次メッシュy
-        ls[digit-1], y = _calcWithBase(ls[digit-1], y, 7)
+        if y != 0:
+          ls[digit-1], y = _calcWithBase(ls[digit-1], y, 7)
       elif digit in [3,4,8]: #  1次メッシュ,3次メッシュX
-        ls[digit-1], x = _calcWithBase(ls[digit-1], x)
+        if x != 0:
+          ls[digit-1], x = _calcWithBase(ls[digit-1], x)
       else: # [1,2,7] 1次メッシュ,3次メッシュY
-        ls[digit-1], y = _calcWithBase(ls[digit-1], y)
+        if y != 0:
+          ls[digit-1], y = _calcWithBase(ls[digit-1], y)
     return ls
 
 def _listDigit(meshCode: Union[int, str]) -> List[int]:

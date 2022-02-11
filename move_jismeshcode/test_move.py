@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import unittest
 from move import move, _calcWithBase
 
@@ -35,6 +34,12 @@ class TestMove(unittest.TestCase):
         """
         actual = move(5438234312, 2, 6)
         self.assertEqual(5438235342, actual)
+
+    def test_moveLv5_2(self):
+        """lv5
+        """
+        actual = move(5339770933, 0, 0)
+        self.assertEqual(5339770933, actual)
 
     def test_moveLv6(self):
         """lv6

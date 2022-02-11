@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import Tuple, Union, List
 from move_jismeshcode.move import _listDigit, _move
 
